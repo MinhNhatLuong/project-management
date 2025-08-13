@@ -17,18 +17,18 @@ function App() {
   }
 
   function handleAddProject(projectData) {
+    const projectId = Math.random();
     const newProject = {
       ...projectData,
-      id: Math.random()
+      id: projectId
     }
 
     setProjectsState(prevProjectsState => ({
       ...prevProjectsState,
+      selectedProjectId: undefined,
       projects: [...prevProjectsState.projects, newProject]
     }))
   }
-
-  console.log(projectsState);
 
   let content;
 
@@ -40,7 +40,7 @@ function App() {
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <ProjectsSidebar onClickAddProject={handleClickAddProject} projectList={projectsState}/>
+      <ProjectsSidebar onClickAddProject={handleClickAddProject} projectList={projectsState.projects}/>
       {content}
     </main>
   );
