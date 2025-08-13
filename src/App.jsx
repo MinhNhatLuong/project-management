@@ -6,41 +6,51 @@ import ProjectsSidebar from "./components/ProjectsSidebar";
 function App() {
   const [projectsState, setProjectsState] = useState({
     selectedProjectId: undefined,
-    projects: []
+    projects: [],
   });
 
   function handleClickAddProject() {
-    setProjectsState(prevProjectsState => ({
+    setProjectsState((prevProjectsState) => ({
       ...projectsState,
-      selectedProjectId: null
-    }))
+      selectedProjectId: null,
+    }));
   }
 
   function handleAddProject(projectData) {
     const projectId = Math.random();
     const newProject = {
       ...projectData,
-      id: projectId
-    }
+      id: projectId,
+    };
 
-    setProjectsState(prevProjectsState => ({
+    setProjectsState((prevProjectsState) => ({
       ...prevProjectsState,
       selectedProjectId: undefined,
-      projects: [...prevProjectsState.projects, newProject]
-    }))
+      projects: [...prevProjectsState.projects, newProject],
+    }));
+  }
+
+  function handleCancelAddProject() {
+    setProjectsState((prevProjectsState) => ({
+      ...projectsState,
+      selectedProjectId: undefined,
+    }));
   }
 
   let content;
 
   if (projectsState.selectedProjectId === null) {
-    content = <NewProject onAdd={handleAddProject}/>;
+    content = <NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject}/>;
   } else if (projectsState.selectedProjectId === undefined) {
     content = <NoProjectSelected onClickAddProject={handleClickAddProject} />;
   }
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <ProjectsSidebar onClickAddProject={handleClickAddProject} projectList={projectsState.projects}/>
+      <ProjectsSidebar
+        onClickAddProject={handleClickAddProject}
+        projectList={projectsState.projects}
+      />
       {content}
     </main>
   );
