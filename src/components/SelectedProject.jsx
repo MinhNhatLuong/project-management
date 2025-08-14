@@ -1,3 +1,5 @@
+import Tasks from "./Tasks";
+
 export default function SelectedProject({ project, onDeleteProject }) {
   const formattedDate = new Date(project.dueDate).toLocaleDateString("vi-VN", {
     year: "numeric",
@@ -21,7 +23,7 @@ export default function SelectedProject({ project, onDeleteProject }) {
           {project.description}
         </p>
       </header>
-      TASK
+      <Tasks />
     </div>
   );
 }
