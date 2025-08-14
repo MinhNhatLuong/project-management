@@ -4,23 +4,23 @@ import Modal from "./Modal";
 
 export default function NewProject({ onAdd, onCancel }) {
   const title = useRef();
-  const desciption = useRef();
+  const description = useRef();
   const dueDate = useRef();
   const modal = useRef();
 
-  function handleSaveProject(title, desciption, dueDate) {
+  function handleSaveProject(title, description, dueDate) {
     //wil have validation
 
     if (
       title.trim() === "" ||
-      desciption.trim() === "" ||
+      description.trim() === "" ||
       dueDate.trim() === ""
     ) {
       modal.current.open();
       return;
     }
 
-    onAdd({ title, desciption, dueDate });
+    onAdd({ title, description, dueDate });
   }
 
   return (
@@ -42,7 +42,7 @@ export default function NewProject({ onAdd, onCancel }) {
               onClick={() => {
                 handleSaveProject(
                   title.current.value,
-                  desciption.current.value,
+                  description.current.value,
                   dueDate.current.value
                 );
               }}
@@ -54,7 +54,7 @@ export default function NewProject({ onAdd, onCancel }) {
         </menu>
         <div>
           <Input type="text" label="Title" ref={title} />
-          <Input label="Desciption" isTextArea ref={desciption} />
+          <Input label="Description" isTextArea ref={description} />
           <Input type="date" label="Due Date" ref={dueDate} />
         </div>
       </div>
