@@ -11,6 +11,7 @@ function App() {
     tasks: [],
   });
 
+  //page navigation functions
   function handleClickAddProject() {
     setProjectsState((prevProjectsState) => ({
       ...projectsState,
@@ -18,6 +19,21 @@ function App() {
     }));
   }
 
+  function handleCancelAddProject() {
+    setProjectsState((prevProjectsState) => ({
+      ...projectsState,
+      selectedProjectId: undefined,
+    }));
+  }
+  
+  function handleSelectProject(id) {
+    setProjectsState((prevProjectsState) => ({
+      ...projectsState,
+      selectedProjectId: id,
+    }));
+  }
+
+  //CRUD project functions
   function handleAddProject(projectData) {
     const projectId = Math.random();
     const newProject = {
@@ -32,20 +48,6 @@ function App() {
     }));
   }
 
-  function handleCancelAddProject() {
-    setProjectsState((prevProjectsState) => ({
-      ...projectsState,
-      selectedProjectId: undefined,
-    }));
-  }
-
-  function handleSelectProject(id) {
-    setProjectsState((prevProjectsState) => ({
-      ...projectsState,
-      selectedProjectId: id,
-    }));
-  }
-
   function handleDeleteProject() {
     setProjectsState((prevProjectsState) => ({
       ...projectsState,
@@ -55,7 +57,8 @@ function App() {
       ),
     }));
   }
-
+  
+  //CRUD task functions
   function handleAddTask(text) {
     setProjectsState((prevProjectsState) => {
       const taskId = Math.random();
